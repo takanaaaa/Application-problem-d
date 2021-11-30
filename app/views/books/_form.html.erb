@@ -7,7 +7,31 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+  <% if action_name == "edit" %>
+    <div class="book-evaluation" data-score="<%= @book.evaluation%>"></div>
+  <% else %>
+    <div class="form-group" id="evaluate_stars">
+      <%= f.label :rate %>
+      <%= f.hidden_field :evaluation, id: :review_star %>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>
 <% end %>
+<script>
+$("#evaluate_stars").raty({
+  starOn: "<%= asset_path("star-on.png") %>",
+  starOff: "<%= asset_path("star-off.png") %>",
+  starHalf: "<%= asset_path("star-half.png") %>",
+  scoreName: "book[evaluation]",
+  half: true,
+});
+$(".book-evaluation").raty({
+  readOnly: true,
+  score: function() {
+    return $(this).attr("data-score");
+  },
+  path: "/assets/"
+});
+</script>

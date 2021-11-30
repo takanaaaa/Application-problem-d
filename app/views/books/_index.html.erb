@@ -16,6 +16,9 @@
         </td>
         <td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
         <td><%= book.body %></td>
+        <% if controller_name == "books" && action_name == "index" %>
+          <td class="book-evaluation" data-score="<%= book.evaluation%>"></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
