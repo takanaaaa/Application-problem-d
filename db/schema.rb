@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_30_093200) do
+ActiveRecord::Schema.define(version: 2021_11_30_131521) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -19,6 +19,21 @@ ActiveRecord::Schema.define(version: 2021_11_30_093200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "evaluation"
+  end
+
+  create_table "tag_maps", force: :cascade do |t|
+    t.integer "book_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_tag_maps_on_book_id"
+    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
